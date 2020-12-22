@@ -1,0 +1,65 @@
+<template name="@reqget" value="@org.springframework.web.bind.annotation.GetMapping(value = &quot;/get$ENTITY$/{$PARAMETER$Id}&quot;)&#10;public ResponseEntity&lt;$ENTITY$&gt; get$ENTITY$(@PathVariable(&quot;$PARAMETER$Id&quot;) Long $PARAMETER$Id) {&#10;    return new ResponseEntity&lt;&gt;($PARAMETER$Service.get$ENTITY$($PARAMETER$Id), HttpStatus.OK);&#10;}" description="Get mapping method" toReformat="true" toShortenFQNames="true">
+    <variable name="ENTITY" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="PARAMETER" expression="camelCase(ENTITY)" defaultValue="" alwaysStopAt="false" />
+    <context>
+        <option name="JAVA_CODE" value="true" />
+    </context>
+</template>
+<template name="@reqpost" value="@org.springframework.web.bind.annotation.PostMapping(value = &quot;/$METHOD_PREFIX$$ENTITY$&quot;)&#10;public ResponseEntity&lt;$ENTITY$&gt; $METHOD_PREFIX$$ENTITY$(@org.springframework.web.bind.annotation.RequestBody $ENTITY$ $ENTITY_VARIABLE$) {&#10;    return new ResponseEntity&lt;&gt;($ENTITY_VARIABLE$Service.$METHOD_PREFIX$$ENTITY$($ENTITY_VARIABLE$), HttpStatus.OK);&#10;}" description="Post mapping method" toReformat="true" toShortenFQNames="true">
+<variable name="METHOD_PREFIX" expression="" defaultValue="" alwaysStopAt="true" />
+<variable name="ENTITY" expression="" defaultValue="" alwaysStopAt="true" />
+<variable name="ENTITY_VARIABLE" expression="camelCase(ENTITY)" defaultValue="" alwaysStopAt="true" />
+<context>
+    <option name="JAVA_CODE" value="true" />
+</context>
+</template>
+<template name="h2conf" value="spring.datasource.driver-class-name=org.h2.Driver&#10;spring.datasource.url=jdbc:h2:file:~/$FILE_NAME$&#10;spring.datasource.username=sa&#10;spring.datasource.password=&#10;spring.jpa.show-sql=true&#10;spring.jpa.generate-ddl=true&#10;spring.jpa.hibernate.ddl-auto=update" description="H2 database configurations" toReformat="true" toShortenFQNames="true">
+<variable name="FILE_NAME" expression="" defaultValue="&quot;application&quot;" alwaysStopAt="true" />
+<context>
+    <option name="JAVA_CODE" value="true" />
+</context>
+</template>
+<template name="jpaentitylom" value="@lombok.Data&#10;@lombok.AllArgsConstructor&#10;@lombok.NoArgsConstructor&#10;@javax.persistence.Entity&#10;public class $NAME$ {&#10;&#10;    @javax.persistence.Id&#10;    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)&#10;    private java.lang.Long id;&#10;&#10;    private java.lang.String name;&#10;&#10;}" description="Create JPA entity use with lombok" toReformat="true" toShortenFQNames="true">
+<variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+<context>
+    <option name="JAVA_CODE" value="true" />
+</context>
+</template>
+<template name="jparepo" value="public interface $ENTITY$Repository extends org.springframework.data.repository.CrudRepository&lt;$ENTITY$, Long&gt; {&#10;&#10;    org.springframework.data.domain.Page&lt;$ENTITY$&gt; findAll(org.springframework.data.domain.Pageable pageable);&#10;&#10;}" description="Create JPA repository class with defined entity" toReformat="true" toShortenFQNames="true">
+<variable name="ENTITY" expression="" defaultValue="&quot;User&quot;" alwaysStopAt="true" />
+<context>
+    <option name="JAVA_CODE" value="true" />
+</context>
+</template>
+<template name="spcontroller" value="@org.springframework.web.bind.annotation.RestController&#10;@org.springframework.web.bind.annotation.RequestMapping(&quot;/$ENDPOINT$&quot;)&#10;public class $ENTITY$Controller {&#10;&#10;    private $ENTITY$Service $ENTITY_VARIABLE$Service;&#10;&#10;    @org.springframework.beans.factory.annotation.Autowired&#10;    public $ENTITY$Controller($ENTITY$Service $ENTITY_VARIABLE$Service) {&#10;        this.$ENTITY_VARIABLE$Service = $ENTITY_VARIABLE$Service;&#10;    }&#10;&#10;    @RequestMapping(value = &quot;/{page}&quot;)&#10;    public org.springframework.http.ResponseEntity&lt;java.util.List&lt;$ENTITY$&gt;&gt; findById(@org.springframework.web.bind.annotation.PathVariable(&quot;page&quot;) int page) {&#10;        return new ResponseEntity&lt;&gt;($ENTITY_VARIABLE$Service.findAll(page), org.springframework.http.HttpStatus.OK);&#10;    }&#10;&#10;}" description="Create spring controller with autowired service and add findAll get method" toReformat="true" toShortenFQNames="true">
+<variable name="ENTITY" expression="" defaultValue="" alwaysStopAt="true" />
+<variable name="ENTITY_VARIABLE" expression="camelCase(ENTITY)" defaultValue="" alwaysStopAt="true" />
+<variable name="ENDPOINT" expression="" defaultValue="ENTITY_VARIABLE" alwaysStopAt="true" />
+<context>
+    <option name="JAVA_CODE" value="true" />
+</context>
+</template>
+<template name="spfindall" value="org.springframework.data.domain.PageRequest pageRequest = org.springframework.data.domain.PageRequest.of($PAGE$ - 1, $SIZE$);&#10;java.util.List&lt;$ENTITY$&gt; $ENTITY_VARIABLE$List = $ENTITY_VARIABLE$Repository.findAll(pageRequest).getContent();" description="Create to derive a Pageable instance from the request parameters and get all item list" toReformat="true" toShortenFQNames="true">
+<variable name="PAGE" expression="" defaultValue="&quot;page&quot;" alwaysStopAt="true" />
+<variable name="SIZE" expression="" defaultValue="&quot;10&quot;" alwaysStopAt="true" />
+<variable name="ENTITY" expression="" defaultValue="" alwaysStopAt="true" />
+<variable name="ENTITY_VARIABLE" expression="camelCase(ENTITY)" defaultValue="" alwaysStopAt="true" />
+<context>
+    <option name="JAVA_CODE" value="true" />
+</context>
+</template>
+<template name="spservice" value="@org.springframework.stereotype.Service&#10;public class $ENTITY$Service {&#10;&#10;    private $ENTITY$Repository $ENTITY_VARIABLE$Repository;&#10;&#10;    @org.springframework.beans.factory.annotation.Autowired&#10;    public $ENTITY$Service($ENTITY$Repository $ENTITY_VARIABLE$Repository) {&#10;        this.$ENTITY_VARIABLE$Repository = $ENTITY_VARIABLE$Repository;&#10;    }&#10;&#10;    public java.util.List&lt;$ENTITY$&gt; findAll(int page){&#10;        List&lt;$ENTITY$&gt; $ENTITY_VARIABLE$List = new java.util.ArrayList&lt;&gt;();&#10;&#10;        return $ENTITY_VARIABLE$List;&#10;    }&#10;}" description="Create spring service with autowired repository and add first empty method" toReformat="true" toShortenFQNames="true">
+<variable name="ENTITY" expression="" defaultValue="" alwaysStopAt="true" />
+<variable name="ENTITY_VARIABLE" expression="camelCase(ENTITY)" defaultValue="" alwaysStopAt="true" />
+<context>
+    <option name="JAVA_CODE" value="true" />
+</context>
+</template>
+<template name="valclass" value="public class Validator {&#10;&#10;    public static void validateUser($ENTITY$ $ENTITY_VARIABLE$) {&#10;        org.springframework.util.Assert.isTrue($ENTITY_VARIABLE$ != null, &quot;$ENTITY_VARIABLE$ $ERROR_MESSAGE$&quot;);&#10;    }&#10;}" description="Check all request for requested items" toReformat="true" toShortenFQNames="true">
+<variable name="ENTITY" expression="" defaultValue="" alwaysStopAt="true" />
+<variable name="ENTITY_VARIABLE" expression="camelCase(ENTITY)" defaultValue="" alwaysStopAt="true" />
+<variable name="ERROR_MESSAGE" expression="" defaultValue="&quot;cannot be null&quot;" alwaysStopAt="true" />
+<context>
+    <option name="JAVA_CODE" value="true" />
+</context>
+</template>
