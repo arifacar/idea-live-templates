@@ -3,6 +3,8 @@ These are the [IntelliJ IDEA Live Templates](https://www.jetbrains.com/help/idea
 
 Copy springboot.xml content (right click and select copy, or ctrl+c), and paste it into your "Template Group". Right click one of the groups and select Paste. This is easiest way. 
 
+[Click here](https://www.youtube.com/watch?v=pNZAr2xwdTo&t=7m47) if you want to watch how it's done -Turkish- 
+
 ## Spring BOOT TEMPLATES
 
 ### jpaentitylom
